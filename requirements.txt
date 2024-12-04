@@ -4,5 +4,4 @@ pandas
 numpy
 matplotlib
 streamlit
-streamlit-option-menu
 socket
