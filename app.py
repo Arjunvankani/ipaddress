@@ -3,12 +3,14 @@ import pandas as pd
 import re
 from collections import defaultdict
 import matplotlib.pyplot as plt
-import plotly.express as px
+
 import requests
 from io import StringIO
 import socket  
 import time  
-import os  
+import os
+import seaborn as sns
+
 
 st.title('Log File Analysis with Graphical Insights')
 sidebar_options = st.sidebar.radio("Choose an option", ["Home", "Advanced"])
@@ -92,8 +94,11 @@ if sidebar_options == "Home":
         st.subheader("Endpoint Access Frequency - Pie Chart")
         endpoint_data = sorted(endpoint_requests.items(), key=lambda x: x[1], reverse=True)
         endpoint_df = pd.DataFrame(endpoint_data, columns=["Endpoint", "Access Count"])
-        fig_pie = px.pie(endpoint_df, names="Endpoint", values="Access Count", title="Endpoint Access Frequency")
-        st.plotly_chart(fig_pie)
+        fig, ax = plt.subplots()
+        ax.pie(endpoint_df['Access Count'], labels=endpoint_df['Endpoint'], autopct='%1.1f%%', startangle=90, colors=sns.color_palette("Set3", len(endpoint_df)))
+        ax.axis('equal')  # Equal aspect ratio ensures that pie chart is drawn as a circle.
+        ax.set_title("Endpoint Access Frequency")
+        st.pyplot(fig)
 
         # 3. Detect Suspicious Activity (failed login attempts)
         st.subheader('Suspicious Activity - Failed Login Attempts')
