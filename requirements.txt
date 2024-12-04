@@ -5,3 +5,5 @@ numpy
 matplotlib
 streamlit
 streamlit-option-menu
+plotly
+socket
