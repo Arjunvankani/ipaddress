@@ -5,5 +5,4 @@ numpy
 matplotlib
 streamlit
 streamlit-option-menu
-seaborn
 socket
