@@ -9,7 +9,7 @@ from io import StringIO
 import socket  
 import time  
 import os
-import seaborn as sns
+
 
 
 st.title('Log File Analysis with Graphical Insights')
@@ -95,7 +95,7 @@ if sidebar_options == "Home":
         endpoint_data = sorted(endpoint_requests.items(), key=lambda x: x[1], reverse=True)
         endpoint_df = pd.DataFrame(endpoint_data, columns=["Endpoint", "Access Count"])
         fig, ax = plt.subplots()
-        ax.pie(endpoint_df['Access Count'], labels=endpoint_df['Endpoint'], autopct='%1.1f%%', startangle=90, colors=sns.color_palette("Set3", len(endpoint_df)))
+        ax.pie(endpoint_df['Access Count'], labels=endpoint_df['Endpoint'], autopct='%1.1f%%', startangle=90)
         ax.axis('equal')  # Equal aspect ratio ensures that pie chart is drawn as a circle.
         ax.set_title("Endpoint Access Frequency")
         st.pyplot(fig)
