@@ -5,5 +5,5 @@ numpy
 matplotlib
 streamlit
 streamlit-option-menu
-plotly
+plotly==5.24.1
 socket
