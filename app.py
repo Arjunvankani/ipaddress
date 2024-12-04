@@ -122,6 +122,7 @@ if sidebar_options == "Home":
 
         save_results = st.checkbox("Save results to CSV")
         
+        
         if save_results:
             log_analysis_results = {
                 'Requests per IP': ip_df,
@@ -131,8 +132,20 @@ if sidebar_options == "Home":
             }
 
             for key, df in log_analysis_results.items():
-                df.to_csv(f'{key.lower().replace(" ", "_")}_results.csv', index=False)
+                # Save the results as a CSV file
+                csv_filename = f'{key.lower().replace(" ", "_")}_results.csv'
+                df.to_csv(csv_filename, index=False)
                 st.write(f"Results for {key} saved as CSV.")
+                
+                # Provide download button for the saved CSV file
+                with open(csv_filename, 'r') as f:
+                    st.download_button(
+                        label=f"Download {key} CSV",
+                        data=f,
+                        file_name=csv_filename,
+                        mime="text/csv"
+                    )
+
                 
 # create log from website request
 def create_log_from_url(website_url):
